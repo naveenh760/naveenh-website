@@ -1,0 +1,22 @@
+# IDE
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Sensitive files
+*.json
+!package.json
+!manifest.json
+!composer.json
+!jsconfig.json
+!tsconfig.json
+
+
