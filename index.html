@@ -208,11 +208,7 @@
                         </a>
                     </div>
                 </div>
-                <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
-                    <input type="hidden" name="form-name" value="contact">
-                    <p class="hidden" style="display: none;">
-                        <label>Don't fill this out: <input name="bot-field"></label>
-                    </p>
+                <form name="contact" id="contact-form" class="contact-form">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" required placeholder="Your name">
@@ -229,7 +225,10 @@
                         <label for="message">Message</label>
                         <textarea id="message" name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-full">
+                    
+                    <div id="form-status" class="form-status"></div>
+                    
+                    <button type="submit" class="btn btn-primary btn-full" id="submit-btn">
                         <span>Send Message</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="22" y1="2" x2="11" y2="13"></line>

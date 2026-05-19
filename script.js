@@ -133,26 +133,63 @@ function initAnimations() {
 }
 
 // ===================================
-// Form Handling (Optional enhancement)
+// Form Handling (Cloud Function API)
 // ===================================
-const contactForm = document.querySelector('.contact-form');
+const contactForm = document.getElementById('contact-form');
+const formStatus = document.getElementById('form-status');
+
 if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        // Add loading state to button
-        const submitBtn = this.querySelector('button[type="submit"]');
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault(); // Prevent default page reload
+        
+        const submitBtn = document.getElementById('submit-btn');
         const originalContent = submitBtn.innerHTML;
         
+        // Loading state
         submitBtn.innerHTML = '<span>Sending...</span>';
         submitBtn.disabled = true;
+        formStatus.textContent = '';
+        formStatus.className = 'form-status';
         
-        // Netlify handles the actual form submission
-        // This is just for visual feedback
-        
-        // Reset button after submission (handled by page reload on Netlify)
-        setTimeout(() => {
+        // Get form data
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            subject: document.getElementById('subject').value,
+            message: document.getElementById('message').value
+        };
+
+        try {
+            const response = await fetch('https://contactform-3jr2ju7rna-uc.a.run.app', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                // Success UI
+                formStatus.textContent = 'Message sent successfully! I will get back to you soon.';
+                formStatus.className = 'form-status success';
+                contactForm.reset();
+            } else {
+                // Error UI from Server
+                formStatus.textContent = result.message || 'Something went wrong. Please try again.';
+                formStatus.className = 'form-status error';
+            }
+        } catch (error) {
+            // Network Error UI
+            console.error('Submission Error:', error);
+            formStatus.textContent = 'Failed to connect to the server. Please try again later.';
+            formStatus.className = 'form-status error';
+        } finally {
+            // Reset button
             submitBtn.innerHTML = originalContent;
             submitBtn.disabled = false;
-        }, 3000);
+        }
     });
 }
 
