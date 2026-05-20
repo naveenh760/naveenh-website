@@ -1034,9 +1034,25 @@ button {
 }
 
 /* ===================================
-   Mobile Navigation
+   Mobile Responsiveness
    =================================== */
 @media (max-width: 768px) {
+    .section {
+        padding: var(--space-3xl) 0;
+    }
+    
+    .section-title {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .hero-subtitle {
+        font-size: var(--font-size-xl);
+    }
+    
+    .hero-description {
+        font-size: var(--font-size-base);
+    }
+
     .nav-toggle {
         display: flex;
     }
@@ -1105,4 +1121,44 @@ button {
 .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Extra small devices (phones) */
+@media (max-width: 480px) {
+    html {
+        font-size: 14px; /* Shrink root rem size for smaller screens */
+    }
+    
+    .hero-cta {
+        width: 100%;
+        gap: var(--space-md);
+    }
+    
+    .hero-cta .btn {
+        width: 100%;
+    }
+
+    .hero-social {
+        gap: var(--space-sm);
+    }
+
+    .stat-card {
+        padding: var(--space-md);
+    }
+    
+    .contact-wrapper {
+        gap: var(--space-xl);
+    }
+
+    .footer-content {
+        text-align: center;
+    }
+
+    .footer-brand p {
+        margin: 0 auto;
+    }
+
+    .footer-social {
+        justify-content: center;
+    }
 }
